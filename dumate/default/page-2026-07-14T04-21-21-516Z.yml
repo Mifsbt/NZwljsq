@@ -1,0 +1,273 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - search [ref=e12]:
+          - generic [ref=e13]:
+            - searchbox "输入搜索词" [ref=e14]
+            - generic "搜索" [ref=e15] [cursor=pointer]:
+              - button "搜索" [ref=e16]:
+                - generic:
+                  - generic:
+                    - img
+        - generic [ref=e18]:
+          - generic "台风“巴威”一路北上" [ref=e19] [cursor=pointer]:
+            - button "台风“巴威”一路北上" [ref=e20]:
+              - generic:
+                - generic:
+                  - generic: 台风“巴威”一路北上
+          - generic "超250万人请愿阿根廷出局" [ref=e21] [cursor=pointer]:
+            - button "超250万人请愿阿根廷出局" [ref=e22]:
+              - generic:
+                - generic:
+                  - generic: 超250万人请愿阿根廷出局
+      - button [ref=e25] [cursor=pointer]:
+        - button [ref=e26]:
+          - generic:
+            - generic:
+              - generic:
+                - img
+      - generic [ref=e27]:
+        - 'link "深圳市: 多云, 29 °C" [ref=e30] [cursor=pointer]':
+          - /url: https://www.msn.cn/zh-cn/weather/forecast/in-%E5%B9%BF%E4%B8%9C%E7%9C%81,%E6%B7%B1%E5%9C%B3%E5%B8%82?loc=eyJsIjoi5rex5Zyz5biCIiwiciI6IuW5v%2BS4nOecgSIsImMiOiLkuK3ljY7kurrmsJHlhbHlkozlm70iLCJpIjoiQ04iLCJnIjoiemgtY24iLCJ4IjoiMTE0LjI0NDg2NTQxNzQ4MDQ3IiwieSI6IjIyLjcxNzQ0MzQ2NjE4NjUyMyJ9&weadegreetype=C&ocid=msedgdhp&cvid=6a55b93b40bb47c984c5a02089a1ef1e
+          - img "多云" [ref=e32]
+          - generic:
+            - generic [ref=e33]: ‎29‎
+            - generic [ref=e35]: ‎°C‎
+        - generic "页面设置" [ref=e39] [cursor=pointer]:
+          - button "页面设置" [ref=e40]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic: 页面设置
+                  - generic:
+                    - img
+        - button "单击以登录到Microsoft Edge" [ref=e43] [cursor=pointer]:
+          - button "单击以登录到Microsoft Edge" [ref=e44]:
+            - generic:
+              - generic:
+                - generic: 登录
+    - status [ref=e48]:
+      - generic [ref=e49]:
+        - generic "Microsoft 365" [ref=e50]:
+          - generic [ref=e51]:
+            - img [ref=e54]
+            - link "Microsoft 365" [ref=e56] [cursor=pointer]:
+              - /url: https://www.office.com/
+              - generic [ref=e58]: Microsoft 365
+        - generic "淘宝热卖" [ref=e59]:
+          - generic [ref=e60]:
+            - img [ref=e63]
+            - link "淘宝热卖" [ref=e65] [cursor=pointer]:
+              - /url: https://aka.ms/AnaheimTP/ad2-taobaorm-cid174-pid2/Mar26
+              - generic [ref=e67]: 淘宝热卖
+        - generic "京东热卖" [ref=e68]:
+          - generic [ref=e69]:
+            - img [ref=e72]
+            - link "京东热卖" [ref=e74] [cursor=pointer]:
+              - /url: https://aka.ms/AnaheimTP/ad2-jingdongrm-cid176-pid3/Jan26
+              - generic [ref=e76]: 京东热卖
+        - generic "AI大全" [ref=e77]:
+          - generic [ref=e78]:
+            - img [ref=e81]
+            - link "AI大全" [ref=e83] [cursor=pointer]:
+              - /url: https://www.msn.cn/zh-cn/gaming/ai
+              - generic [ref=e85]: AI大全
+        - generic "百度文库" [ref=e86]:
+          - generic [ref=e87]:
+            - img [ref=e90]
+            - link "百度文库" [ref=e92] [cursor=pointer]:
+              - /url: https://aka.ms/AnaheimTP/ad3-baiduwk-cid134-pid5/Jan26
+              - generic [ref=e94]: 百度文库
+        - generic [ref=e96]:
+          - img [ref=e99]
+          - link "添加网站" [ref=e102] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e104]: 添加快捷方式
+    - generic [ref=e107]:
+      - list [ref=e108]:
+        - listitem [ref=e109]:
+          - link "必应搜索" [ref=e110] [cursor=pointer]:
+            - /url: https://cn.bing.com/?form=000047
+            - generic [ref=e111]: 必应搜索
+        - listitem [ref=e112]:
+          - link "抖音" [ref=e113] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad6-douyin-cid116-pid2/Jan26
+            - generic [ref=e114]: 抖音
+        - listitem [ref=e115]:
+          - link "京东热卖" [ref=e116] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad2-jingdongrm-cid172-pid3/Jan26
+            - generic [ref=e117]: 京东热卖
+        - listitem [ref=e118]:
+          - link "AI大全" [ref=e119] [cursor=pointer]:
+            - /url: https://www.msn.cn/zh-cn/gaming/ai
+            - generic [ref=e120]: AI大全
+        - listitem [ref=e121]:
+          - link "阿里1688" [ref=e122] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad3-ali1688-cid147-pid5/Jan26
+            - generic [ref=e123]: 阿里1688
+        - listitem [ref=e124]:
+          - link "TapTap" [ref=e125] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-taptap-cid208-pid6/Jul26
+            - generic [ref=e126]: TapTap
+        - listitem [ref=e127]:
+          - link "爱奇艺" [ref=e128] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad6-iqiyi-cid25-pid7/Jan26
+            - generic [ref=e129]: 爱奇艺
+        - listitem [ref=e130]:
+          - link "小红书·世界杯" [ref=e131] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-xhs-cid205-pid8/Jun26
+            - generic [ref=e132]: 小红书·世界杯
+        - listitem [ref=e133]:
+          - link "Coze" [ref=e134] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad6-coze-cid203-pid23/Mar26
+            - generic [ref=e135]: Coze
+        - listitem [ref=e136]:
+          - link "精品游戏" [ref=e137] [cursor=pointer]:
+            - /url: https://www.msn.cn/zh-cn/gaming
+            - generic [ref=e138]: 精品游戏
+        - listitem [ref=e139]:
+          - link "淘宝热卖" [ref=e140] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad9-taobaorm-cid171-pid11/Jul26
+            - generic [ref=e141]: 淘宝热卖
+        - listitem [ref=e142]:
+          - link "携程旅行" [ref=e143] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad1-ctrip-cid1-pid12/Jul26
+            - generic [ref=e144]: 携程旅行
+        - listitem [ref=e145]:
+          - link "51新传奇专区" [ref=e146] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad9-tzcq-cid206-pid13/Jul26
+            - generic [ref=e147]: 51新传奇专区
+        - listitem [ref=e148]:
+          - link "4366传奇专区" [ref=e149] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-4366-cid66-pid14/Jul26
+            - generic [ref=e150]: 4366传奇专区
+        - listitem [ref=e151]:
+          - link "传奇打金爽服" [ref=e152] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-602game-cid207-pid15/Jul26
+            - generic [ref=e153]: 传奇打金爽服
+        - listitem [ref=e154]:
+          - link "天猫" [ref=e155] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad2-tmall-cid195-pid10/Jan26
+            - generic [ref=e156]: 天猫
+        - listitem [ref=e157]:
+          - link "2026传奇专区" [ref=e158] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-4366cq-cid197-pid17/Jul26
+            - generic [ref=e159]: 2026传奇专区
+        - listitem [ref=e160]:
+          - link "百度文库" [ref=e161] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad3-baiduwk-cid121-pid4/Jan26
+            - generic [ref=e162]: 百度文库
+        - listitem [ref=e163]:
+          - link "百度网盘" [ref=e164] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad3-baidupan-cid201-pid20/Feb26
+            - generic [ref=e165]: 百度网盘
+        - listitem [ref=e166]:
+          - link "经典游戏" [ref=e167] [cursor=pointer]:
+            - /url: https://www.msn.com/zh-cn/play/classics?cgfrom=cg_ntp_pivot
+            - generic [ref=e168]: 经典游戏
+        - listitem [ref=e169]:
+          - link "MSN中国" [ref=e170] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/int-MSN-cid51-pid21/Jun26
+            - generic [ref=e171]: MSN中国
+        - listitem [ref=e172]:
+          - link "37游戏" [ref=e173] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-37game-cid67-pid22/Jul26
+            - generic [ref=e174]: 37游戏
+        - listitem [ref=e175]:
+          - link "剪映专业版" [ref=e176] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-jianying-cid199-pid23/Jun26
+            - generic [ref=e177]: 剪映专业版
+        - listitem [ref=e178]:
+          - link "TRAE-编程" [ref=e179] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad8-trae-cid166-pid24/Apr26
+            - generic [ref=e180]: TRAE-编程
+        - listitem [ref=e181]:
+          - link "淘宝" [ref=e182] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad3-tb-cid170-pid21/Jan26
+            - generic [ref=e183]: 淘宝
+        - listitem [ref=e184]:
+          - link "唯品会" [ref=e185] [cursor=pointer]:
+            - /url: https://aka.ms/AnaheimRW/ad7-vip-cid202-pid22/Mar26
+            - generic [ref=e186]: 唯品会
+        - listitem [ref=e187]:
+          - link "小游戏" [ref=e188] [cursor=pointer]:
+            - /url: https://www.msn.com/zh-cn/play?cgfrom=cg_ntp_pivot
+            - generic [ref=e189]: 小游戏
+        - listitem [ref=e190]:
+          - link "一点视频" [ref=e191] [cursor=pointer]:
+            - /url: https://msn.yidianzixun.com/zh-cn/video/webcontent/web-content/?cm=zh-cn&providerId=AA1JHler
+            - generic [ref=e192]: 一点视频
+        - listitem [ref=e193]:
+          - link "策略游戏" [ref=e194] [cursor=pointer]:
+            - /url: https://www.msn.com/zh-cn/play/strategy?cgfrom=cg_ntp_pivot
+            - generic [ref=e195]: 策略游戏
+        - listitem [ref=e196]:
+          - link "更多" [ref=e197] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e198]: 更多
+      - generic [ref=e199]: 广告
+      - button "更多选项" [ref=e200] [cursor=pointer]:
+        - button "更多选项" [ref=e201]:
+          - generic:
+            - generic:
+              - img
+      - generic:
+        - generic: 关闭
+        - generic: 2 行
+        - generic: 3 行
+  - img [ref=e206]
+  - generic [ref=e209]:
+    - button "编辑背景" [ref=e210] [cursor=pointer]:
+      - img [ref=e212]
+      - generic [ref=e214]: 编辑背景
+    - button "查看背景" [ref=e215] [cursor=pointer]:
+      - img [ref=e217]
+      - generic [ref=e219]: 查看背景
+    - separator [ref=e220]
+    - button "刷新页面" [ref=e221] [cursor=pointer]:
+      - img [ref=e223]
+      - generic [ref=e225]: 刷新页面
+  - generic [ref=e232]:
+    - navigation [ref=e234]:
+      - link "MSN" [ref=e235] [cursor=pointer]:
+        - /url: https://www.msn.cn/zh-cn
+      - generic [ref=e237]:
+        - list [ref=e238]:
+          - listitem [ref=e239]:
+            - link "发现" [ref=e240] [cursor=pointer]:
+              - /url: https://www.msn.cn/zh-cn/feed
+        - list [ref=e241]:
+          - listitem [ref=e242]:
+            - link "游戏" [ref=e243] [cursor=pointer]:
+              - /url: https://www.msn.cn/zh-cn/gaming
+          - listitem [ref=e244]:
+            - link "资讯" [ref=e245] [cursor=pointer]:
+              - /url: https://www.msn.cn/zh-cn/channel/topic/要闻/tp-Y_77f04c37-b63e-46b4-a990-e926f7d129ff
+          - listitem [ref=e246]:
+            - link "世界杯" [ref=e247] [cursor=pointer]:
+              - /url: https://www.msn.cn/zh-cn/sports/soccer/fifa_world_cup?uxmode=ruby
+      - generic "显示更多兴趣话题" [ref=e249] [cursor=pointer]:
+        - button "显示更多兴趣话题" [ref=e250]:
+          - generic:
+            - generic:
+              - img
+    - generic [ref=e251]:
+      - generic "信息提要设置" [ref=e252] [cursor=pointer]:
+        - button "信息提要设置" [ref=e253]:
+          - generic:
+            - generic: 页面布局
+      - generic "个性化资讯源“" [ref=e254] [cursor=pointer]:
+        - button "个性化资讯源“" [ref=e255]:
+          - generic:
+            - generic:
+              - img
+          - generic:
+            - generic: 个性化设置
+  - generic "帮助和反馈" [ref=e258] [cursor=pointer]:
+    - button "帮助和反馈" [ref=e259]:
+      - generic:
+        - generic:
+          - img
+      - generic:
+        - generic: 帮助和反馈
