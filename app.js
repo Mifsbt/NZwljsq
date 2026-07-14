@@ -1390,10 +1390,15 @@ function flushPendingBonus(stats) {
 
 function applySecondary(stats, secondaryWeapon) {
   const result = { ...stats };
-  // 副武器仅提供特效加成（武器伤害提升%），不再叠加固定协同伤害
   const eff = secondaryWeapon.effects;
   if (eff && eff.e1 && eff.e1.dmg && result.damage > 0) {
     result.damage = Math.round(result.damage * (1 + eff.e1.dmg / 100));
+  }
+  if (eff && eff.e2 && eff.e2.crit) {
+    result.critRate = (result.critRate || 0) + eff.e2.crit;
+  }
+  if (eff && eff.e2 && eff.e2.critDmg) {
+    result.critDmg = (result.critDmg != null ? result.critDmg : 50) + eff.e2.critDmg;
   }
   return result;
 }
