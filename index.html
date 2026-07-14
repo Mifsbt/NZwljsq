@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逆战未来 · 武器伤害计算器</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 顶部工具栏 -->
+    <header id="toolbar">
+      <div class="toolbar-left">
+        <div class="logo">
+          <img src="ass/T_Common_Logo_01.png" alt="逆战未来" class="logo-img" />
+          <span class="logo-sub">武器伤害计算器</span>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <span class="toolbar-credit">by：番薯不甜</span>
+        <button id="btn-import" class="toolbar-btn" title="导入自定义数据（JSON）">
+          导入数据
+        </button>
+        <input type="file" id="import-file" accept=".json,application/json" style="display:none;" />
+        <div class="toolbar-divider"></div>
+        <button id="btn-clear" class="toolbar-btn danger" title="清空画布">
+          清空
+        </button>
+        <button id="btn-help" class="toolbar-btn" title="使用帮助">
+          帮助
+        </button>
+      </div>
+    </header>
+
+    <!-- 主区域 -->
+    <main id="main">
+      <!-- 无限画布区域 -->
+      <div id="canvas-area">
+        <!-- 背景网格 -->
+        <div id="grid-bg"></div>
+        <!-- 连线层 (SVG) -->
+        <svg id="connections-svg">
+          <defs>
+            <!-- 连线渐变（暗金） -->
+            <linearGradient id="conn-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#e8c874" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#c9a227" stop-opacity="0.95"/>
+            </linearGradient>
+            <!-- 箭头 -->
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#c9a227"/>
+            </marker>
+            <!-- 连线极光渐变（流动动画） -->
+            <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="0" spreadMethod="repeat">
+              <stop offset="0" stop-color="#2ee6a6"/>
+              <stop offset="0.33" stop-color="#3fd9d2"/>
+              <stop offset="0.66" stop-color="#7aa8ff"/>
+              <stop offset="1" stop-color="#b98bff"/>
+              <animateTransform attributeName="gradientTransform" type="translate"
+                from="0 0" to="1 0" dur="4s" repeatCount="indefinite"/>
+            </linearGradient>
+          </defs>
+          <g id="connections-group"></g>
+          <!-- 临时连线（拖拽中） -->
+          <path id="temp-connection" class="temp-connection" d="" />
+        </svg>
+        <!-- 节点层 -->
+        <div id="nodes-layer"></div>
+        <!-- 画布提示 -->
+        <div id="canvas-hint" class="canvas-hint">
+          <div class="hint-content">
+            <div class="hint-text">
+              <p><strong>你好啊！这是由AI打造的武器计算器</strong></p>
+              <p>在画布上<strong>右键</strong>可添加「输出节点 / 输入节点 / 距离节点 / 攻击节点」，技能伤害提升只能用输入节点测试，例如：死神大招2000就输入2000。部分内容我都没有去完整测试，不敢保证所有数据都对，你可以点击<a href="https://space.bilibili.com/3706971096090632?spm_id_from=333.1007.0.0" target="_blank" style="color:#38bdf8;text-decoration:underline;font-weight:700;font-size:16px;">＞B站主页＜</a>来联系我反馈问题。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右键上下文菜单 -->
+        <div id="context-menu" class="context-menu" style="display:none;"></div>
+      </div>
+
+      <!-- 右侧筛选面板 -->
+      <aside id="sidebar">
+        <!-- 标签切换 -->
+        <div id="sidebar-tabs">
+          <button class="sidebar-tab active" data-tab="主武器">
+            <span class="tab-label">主武器</span>
+          </button>
+          <button class="sidebar-tab" data-tab="副武器">
+            <span class="tab-label">副武器</span>
+          </button>
+          <button class="sidebar-tab" data-tab="近战武器">
+            <span class="tab-label">近战武器</span>
+          </button>
+          <button class="sidebar-tab" data-tab="插件">
+            <span class="tab-label">插件</span>
+          </button>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="sidebar-search">
+          <input type="text" id="search-input" placeholder="搜索武器..." />
+        </div>
+
+        <!-- 子分类筛选（仅主武器/副武器显示） -->
+        <div id="sub-categories" class="sub-categories"></div>
+
+        <!-- 武器列表 -->
+        <div id="sidebar-list" class="sidebar-list"></div>
+      </aside>
+
+      <!-- 移动端侧边栏遮罩 -->
+      <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+      <!-- 移动端侧边栏切换按钮 -->
+      <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+    </main>
+
+    <!-- 底部状态栏 -->
+    <footer id="status-bar">
+      <div class="status-left">
+        <span class="status-item">节点: <strong id="node-count">0</strong></span>
+        <span class="status-item">连线: <strong id="conn-count">0</strong></span>
+        <span class="status-item">缩放: <strong id="zoom-level">100%</strong></span>
+        <span class="status-item save-status" id="save-status">进度将自动保存</span>
+      </div>
+      <div class="status-right">
+        <span class="status-item dps-display">
+          5秒伤害: <strong id="final-dps">--</strong>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 帮助弹窗 -->
+  <div id="help-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>使用帮助</h2>
+        <button class="modal-close" id="help-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="help-section">
+          <h3>节点类型</h3>
+          <ul>
+            <li><strong>武器输入</strong> — 主武器数据源，提供基础伤害与属性</li>
+            <li><strong>插件</strong> — 按 1~4 号分类的通用修饰节点，含单一属性效果</li>
+            <li><strong>副武器</strong> — 通用修饰节点，提供协同加成</li>
+            <li><strong>近战武器</strong> — 仅含轻击/重击伤害与单一属性</li>
+            <li><strong>距离节点</strong> — 通用节点，表示与敌人的距离（米），可串联进链路</li>
+            <li><strong>输入节点</strong> — 手动输入数值节点，作为自定义伤害数据源（如武器技能伤害提升等只能通过输入节点测试）</li>
+            <li><strong>攻击节点</strong> — 通用节点，提供攻击力加成（默认 100%，最高 1500%）</li>
+            <li><strong>输出节点</strong> — 终端节点，计算并显示 5 秒伤害</li>
+          </ul>
+        </div>
+        <div class="help-section">
+          <h3>武器属性</h3>
+          <ul>
+            <li><span class="attr-badge" style="background:#94a3b822;color:#94a3b8;border-color:#94a3b866;">物理</span> 无属性</li>
+            <li><span class="attr-badge" style="background:#ff6b3522;color:#ff6b35;border-color:#ff6b3566;">火焰</span> 持续受到火焰伤害</li>
+            <li><span class="attr-badge" style="background:#38bdf822;color:#38bdf8;border-color:#38bdf866;">寒冰</span> 移动速度降低</li>
+            <li><span class="attr-badge" style="background:#fbbf2422;color:#fbbf24;border-color:#fbbf2466;">电弧</span> 受到的伤害增加</li>
+            <li><span class="attr-badge" style="background:#a855f722;color:#a855f7;border-color:#a855f766;">腐蚀</span> 持续受到腐蚀伤害</li>
+          </ul>
+        </div>
+        <div class="help-section">
+          <h3>连线规则</h3>
+          <ul>
+            <li>点击节点的<strong>输出端口</strong>（右侧圆点）开始连线</li>
+            <li>拖拽到目标节点的<strong>输入端口</strong>（左侧圆点）完成连线</li>
+            <li>数据流向：武器输入 → 插件/副武器/近战武器 → 输出节点</li>
+            <li>点击连线可选中，按 Delete 键删除</li>
+            <li>在<strong>连线上右键</strong>可弹出菜单「断开连接」</li>
+          </ul>
+        </div>
+        <div class="help-section">
+          <h3>画布操作</h3>
+          <ul>
+            <li><strong>平移</strong> — 在空白处按住鼠标拖拽</li>
+            <li><strong>缩放</strong> — 滚轮缩放（0.3x ~ 2.5x）</li>
+            <li><strong>移动节点</strong> — 拖拽节点标题栏</li>
+            <li><strong>添加节点</strong> — 在画布空白处<strong>右键</strong>，选择「输出节点 / 输入节点 / 距离节点 / 攻击节点」</li>
+            <li><strong>删除</strong> — 选中节点/连线后按 Delete 键</li>
+          </ul>
+        </div>
+        <div class="help-section">
+          <h3>5 秒伤害计算</h3>
+          <p>5 秒伤害 = 单发伤害 × 弹丸数 × 5 秒内实际射击发数 × 精准度 ÷ 100 × (1 + 稳定度 ÷ 200) × (1 + 爆炸范围 ÷ 200)</p>
+          <p>5 秒内实际射击发数会受弹夹容量与换弹时间限制（打空弹夹后若剩余时间足够换弹，可继续射击下一弹夹）。</p>
+          <p>插件按连线顺序依次叠加；副武器已连接主武器时仅提供特效加成（武器伤害提升%），不再叠加固定协同伤害；近战武器提供百分比加成。</p>
+          <p>武器技能伤害提升不能用来计算主武器伤害，只能用输入节点计算，例如：死神大招2000就输入2000。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="storage-helper.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

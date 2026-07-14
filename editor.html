@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逆战未来 · 武器数据编辑器</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <div id="editor-app">
+    <!-- 顶部栏 -->
+    <header id="editor-header">
+      <div class="editor-logo">
+        <span class="logo-text">武器数据编辑器</span>
+        <span class="logo-sub">逆战未来</span>
+      </div>
+      <div class="editor-actions">
+        <a href="index.html" class="action-link" title="打开无限画布计算器">打开计算器</a>
+        <button id="btn-import-json" class="action-btn">导入JSON</button>
+        <button id="btn-export-json" class="action-btn primary">导出JSON</button>
+        <button id="btn-clear-all" class="action-btn danger">清空</button>
+        <input type="file" id="import-file" accept=".json,application/json" style="display:none;" />
+      </div>
+    </header>
+
+    <main id="editor-main">
+      <!-- 左侧表单 -->
+      <aside id="editor-form-panel">
+        <h2 class="panel-title">添加 / 编辑武器</h2>
+
+        <form id="editor-form" autocomplete="off">
+          <!-- 分类 -->
+          <div class="form-group">
+            <label>分类</label>
+            <select id="f-category">
+              <option value="主武器">主武器</option>
+              <option value="副武器">副武器</option>
+              <option value="近战武器">近战武器</option>
+              <option value="插件">插件</option>
+            </select>
+          </div>
+
+          <!-- 子分类（主武器/副武器显示） -->
+          <div class="form-group" id="f-subcat-group">
+            <label id="f-subcat-label">子分类</label>
+            <select id="f-subcat"></select>
+          </div>
+
+          <!-- 图片上传 -->
+          <div class="form-group">
+            <label>武器图片</label>
+            <div class="image-upload-row">
+              <div class="image-preview" id="f-image-preview">
+                <span class="placeholder">无图片</span>
+              </div>
+              <div class="image-upload-actions">
+                <input type="file" id="f-image" accept="image/*" style="display:none;" />
+                <button type="button" id="btn-upload" class="mini-btn">上传图片</button>
+                <button type="button" id="btn-clear-image" class="mini-btn ghost" style="display:none;">清除</button>
+                <p class="hint-small">建议正方形图片，将显示于节点头部</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 名称 -->
+          <div class="form-group">
+            <label>名称</label>
+            <input type="text" id="f-name" placeholder="例如：AK-47" />
+          </div>
+
+          <!-- 武器属性（主/副） -->
+          <div id="weapon-fields">
+            <div class="form-group">
+              <label>属性</label>
+              <select id="f-attribute"></select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>单发伤害</label>
+                <input type="number" id="f-damage" step="any" placeholder="0" />
+              </div>
+              <div class="form-group">
+                <label>弹丸数 (×N)</label>
+                <input type="number" id="f-pellets" step="any" placeholder="1" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>射速</label>
+                <input type="number" id="f-fireRate" step="any" placeholder="0" />
+              </div>
+              <div class="form-group">
+                <label>换弹时间 (s)</label>
+                <input type="number" id="f-reloadTime" step="any" placeholder="0" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>弹夹</label>
+                <input type="number" id="f-magazine" step="any" placeholder="0" />
+              </div>
+              <div class="form-group">
+                <label>总弹量</label>
+                <input type="number" id="f-totalAmmo" step="any" placeholder="0" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>爆炸范围</label>
+                <input type="number" id="f-explosionRange" step="any" placeholder="0" />
+              </div>
+              <div class="form-group">
+                <label>精准度 (%)</label>
+                <input type="number" id="f-accuracy" step="any" placeholder="0" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>稳定度 (%)</label>
+                <input type="number" id="f-stability" step="any" placeholder="0" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 副武器特效 -->
+          <div id="secondary-effects" style="display:none;">
+            <div class="form-group">
+              <label class="effect-title">特效 · 第一条（武器伤害提升）</label>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>武器伤害提升 (%)</label>
+                  <input type="number" id="f-sec-eff1-dmg" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>持续 (s)</label>
+                  <input type="number" id="f-sec-eff1-dur" step="any" placeholder="0" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="effect-title">特效 · 第二条（暴击）</label>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>暴击率 (%)</label>
+                  <input type="number" id="f-sec-eff2-crit" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>暴击伤害 (%)</label>
+                  <input type="number" id="f-sec-eff2-critdmg" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>持续 (s)</label>
+                  <input type="number" id="f-sec-eff2-dur" step="any" placeholder="0" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 近战武器属性 -->
+          <div id="melee-fields" style="display:none;">
+            <div class="form-group">
+              <label>属性</label>
+              <select id="f-melee-attribute"></select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>轻击伤害</label>
+                <input type="number" id="f-light-damage" step="any" placeholder="0" />
+              </div>
+              <div class="form-group">
+                <label>重击伤害</label>
+                <input type="number" id="f-heavy-damage" step="any" placeholder="0" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="effect-title">特效 · 第一条</label>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>属性</label>
+                  <select id="f-eff1-attr"></select>
+                </div>
+                <div class="form-group">
+                  <label>属性伤害 (%)</label>
+                  <input type="number" id="f-eff1-dmg" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>暴击率 (%)</label>
+                  <input type="number" id="f-eff1-crit" step="any" placeholder="0" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group" style="flex:1;">
+                  <label>自定义</label>
+                  <input type="text" id="f-eff1-custom" placeholder="自定义（不计入计算，仅备注）" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="effect-title">特效 · 第二条</label>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>暴击伤害 (%)</label>
+                  <input type="number" id="f-eff2-critdmg" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>近战武器提升 (%)</label>
+                  <input type="number" id="f-eff2-melee" step="any" placeholder="0" />
+                </div>
+                <div class="form-group">
+                  <label>远处武器提升 (%)</label>
+                  <input type="number" id="f-eff2-far" step="any" placeholder="0" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group" style="flex:1;">
+                  <label>自定义</label>
+                  <input type="text" id="f-eff2-custom" placeholder="自定义（不计入计算，仅备注）" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 插件属性 -->
+          <div id="plugin-fields" style="display:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label>插件分类</label>
+                <select id="f-plugin-category">
+                  <option value="1">1号插件</option>
+                  <option value="2">2号插件</option>
+                  <option value="3">3号插件</option>
+                  <option value="4">4号插件</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 单一属性：类型选择 + 数值 -->
+            <div class="form-group">
+              <label>单一属性</label>
+              <select id="f-plugin-attr-type"></select>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="flex:1;">
+                <label>数值 (%)</label>
+                <input type="number" id="f-plugin-attr-value" step="any" placeholder="0" />
+              </div>
+              <div class="form-group" style="flex:0 0 auto;align-self:flex-end;">
+                <label class="toggle-label">
+                  <input type="checkbox" id="f-plugin-independent" />
+                  <span class="toggle-switch"></span>
+                  独立乘区
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>层数上限（可选，1 = 无叠加）</label>
+              <input type="number" id="f-plugin-max-stacks" min="1" max="10" step="1" placeholder="1" />
+              <p class="hint-small">最高可叠加层数，默认1层（无叠加）</p>
+            </div>
+
+            <div class="form-group">
+              <label>详细效果（可选）</label>
+              <textarea id="f-plugin-detail" rows="3" placeholder="例如：切出本武器时向前发射一道剑气..."></textarea>
+            </div>
+          </div>
+
+          <!-- 操作按钮 -->
+          <div class="form-actions">
+            <button type="submit" id="btn-submit" class="action-btn primary">✓ 添加武器</button>
+            <button type="button" id="btn-cancel-edit" class="action-btn ghost" style="display:none;">取消编辑</button>
+          </div>
+        </form>
+      </aside>
+
+      <!-- 右侧列表 -->
+      <section id="editor-list-panel">
+        <div class="list-header">
+          <h2 class="panel-title">已添加武器</h2>
+          <span id="item-count" class="item-count">0 项</span>
+        </div>
+        <div class="list-filter">
+          <input type="text" id="list-search" class="list-search" placeholder="搜索名称 / 属性 / 特效" />
+          <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-tab active" data-cat="全部">全部</button>
+            <button class="filter-tab" data-cat="主武器">主武器</button>
+            <button class="filter-tab" data-cat="副武器">副武器</button>
+            <button class="filter-tab" data-cat="近战武器">近战</button>
+            <button class="filter-tab" data-cat="插件">插件</button>
+          </div>
+        </div>
+        <div id="editor-list" class="editor-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="storage-helper.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>
